@@ -7,30 +7,40 @@ function getInformation() {
     .then((data) => {
         data.forEach((cardName) => {
             const new_div = document.createElement("div");
-            new_div.className = "bg-white shadow-lg p-4 mb-4 rounded-lg cursor-pointer";
+            new_div.className = "bg-white shadow-lg p-4 mb-4 rounded-lg cursor-pointer w-[80%]";
             // console.log(cardName.posterId);
+            
             new_div.innerHTML = `
                 <h3 class="text-lg font-semibold mb-2">${cardName.username}</h3>
-                <img src="${cardName.image}" alt="Post Image" class="w-full h-auto mb-3">
+                <img src="${cardName.image}" alt="Post Image" class="object-contain w-full mb-3">
                 <p class="mb-1">${cardName.description}</p>
                 <p class="text-sm text-gray-600 mb-2 truncate">Clothing Links: ${cardName.clothingLinks}</p>
-                <button class="${cardName.isLiked ? 'dislike-button' : 'like-button'}" data-id="${cardName.id}" data-userid="${cardName.userid}">
+
+            `;
+            
+            const button_div = document.createElement("div")
+            button_div.className = "flex w-[60%] justify-between items-center ";
+
+            button_div.innerHTML = `
+            <button class="${cardName.isLiked ? 'dislike-button' : 'like-button'} w-[80px]" data-id="${cardName.id}" data-userid="${cardName.userid}">
                     ${cardName.isLiked ? 'Dislike' : 'Like'}: ${cardName.likes}
                 </button>
                 <br>
                 <button class="red-button" data-post-id=${cardName.id} data-reported-user=${cardName.username}>Report Post</button>
-                <br>
-            `;
-
+                <br></br>
+            `
+           
             const button = document.createElement("button");
             button.textContent = "View Post";
-            button.className = "view-post-button";
+            button.className = "view-post-button ";
+            button.style.width = "100px";
             button.addEventListener("click", () => {
                 const postId = cardName.id;
                 window.location.href = `/posts/${postId}`;
             });
-            new_div.appendChild(button);
-
+            button_div.appendChild(button);
+            
+            new_div.append(button_div);
              // Keywords
              if (cardName.keywords.length > 0) {
                 const keywords_div = document.createElement("div");
