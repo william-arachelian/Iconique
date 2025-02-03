@@ -7,12 +7,11 @@ function getInformation() {
     .then((data) => {
         data.forEach((cardName) => {
             const new_div = document.createElement("div");
-            new_div.className = "bg-white shadow-lg p-4 mb-4 rounded-lg cursor-pointer w-[80%]";
-            // console.log(cardName.posterId);
-            
+            new_div.className = "bg-white shadow-lg p-4 mb-4 rounded-lg cursor-pointer w-[80%] h-screen";
+
             new_div.innerHTML = `
                 <h3 class="text-lg font-semibold mb-2">${cardName.username}</h3>
-                <img src="${cardName.image}" alt="Post Image" class="object-contain w-full mb-3">
+                <img src="${cardName.image}" alt="Post Image" class="object-contain w-full h-[65%] object-cover mb-3">
                 <p class="mb-1">${cardName.description}</p>
                 <p class="text-sm text-gray-600 mb-2 truncate">Clothing Links: ${cardName.clothingLinks}</p>
 
